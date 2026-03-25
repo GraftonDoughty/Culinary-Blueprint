@@ -1,0 +1,11 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <g filter="drop-shadow(0px 2px 2px rgba(0,0,0,0.2))">
+    <!-- Mitt Body -->
+    <path d="M12 2 C7.5 2 4 5.5 4 10 L4 26 L20 26 L20 22 C20 22 27 22 27 17 C27 12 20 12 20 14 L20 10 C20 5.5 16.5 2 12 2 Z" fill="#D97706" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- Cuff -->
+    <rect x="2" y="24" width="20" height="6" rx="2" fill="#FCD34D" stroke="#FFFFFF" stroke-width="1.5"/>
+    <!-- Quilt Pattern Lines (Subtle) -->
+    <path d="M4 10 L20 26 M10 2 L20 12 M4 18 L12 26" stroke="#FFFFFF" stroke-width="0.75" opacity="0.3"/>
+    <path d="M20 10 L4 26 M14 2 L4 12 M20 18 L12 26" stroke="#FFFFFF" stroke-width="0.75" opacity="0.3"/>
+  </g>
+</svg>

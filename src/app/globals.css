@@ -31,3 +31,9 @@ body {
 h1, h2, h3, h4, .font-serif {
   font-family: var(--font-serif);
 }
+
+@layer base {
+  a, button, [role="button"], input[type="submit"], input[type="file"], select, .cursor-pointer {
+    cursor: url('/mitt-cursor.svg') 12 4, pointer !important;
+  }
+}
