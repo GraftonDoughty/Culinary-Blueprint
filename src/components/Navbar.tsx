@@ -111,7 +111,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className="flex items-center space-x-6 flex-shrink-0">
+          <div className={`flex items-center space-x-6 flex-shrink-0 transition-opacity duration-200 ${isSearchOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
             <button
               onClick={isSearchOpen ? closeSearch : openSearch}
               className={`transition-colors ${isSearchOpen ? "text-artisanal-brown" : "text-artisanal-dark/40 hover:text-artisanal-dark"}`}
