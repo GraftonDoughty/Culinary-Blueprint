@@ -3,6 +3,9 @@ import RecipeGrid from "@/components/RecipeGrid";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import RecipeForm, { RecipeData } from "@/components/RecipeForm";
+import RecipeTweakTools from "@/components/RecipeTweakTools";
+import RecipeView from "@/components/RecipeView";
+import CookingMode from "@/components/CookingMode";
 
 // Mock data lookup for editing
 const getMockRecipe = (id: string): RecipeData | undefined => {
@@ -65,6 +68,46 @@ export default async function DynamicPathPage({
         <Navbar />
         <main className="flex-grow">
           <RecipeForm initialData={recipeData} isEdit={true} />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if ((path === "tweak" || path === "manipulate") && id) {
+    const recipeData = getMockRecipe(id);
+    if (recipeData) {
+      return (
+        <div className="flex min-h-screen flex-col bg-cream-50">
+          <Navbar />
+          <main className="flex-grow">
+            <RecipeTweakTools recipe={recipeData} />
+          </main>
+          <Footer />
+        </div>
+      );
+    }
+  }
+
+  if ((path === "cook" || path === "cooking-mode") && id) {
+    const recipeData = getMockRecipe(id);
+    if (recipeData) {
+      return (
+        <div className="flex min-h-screen flex-col bg-artisanal-dark">
+          <CookingMode recipe={recipeData} />
+        </div>
+      );
+    }
+  }
+
+  // Handle Recipe View (Direct ID as path)
+  const recipeData = getMockRecipe(path);
+  if (recipeData) {
+    return (
+      <div className="flex min-h-screen flex-col bg-cream-50">
+        <Navbar />
+        <main className="flex-grow">
+          <RecipeView recipe={recipeData} />
         </main>
         <Footer />
       </div>
