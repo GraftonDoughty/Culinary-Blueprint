@@ -156,6 +156,7 @@ export default function RecipeTweakTools({ recipe }: { recipe: RecipeData }) {
                   <ul className="space-y-6">
                     {recipe.ingredients.map((ing, idx) => {
                       const processed = convertIngredient(ing);
+                      const match = processed.match(/^(\d+(?:\.\d+)?\s*[a-zA-Z]*)\s+(.*)$/i);
                       return (
                         <li key={idx} className="flex items-start group">
                           <div className="flex h-5 w-5 items-center justify-center mr-4 flex-shrink-0">
@@ -169,7 +170,14 @@ export default function RecipeTweakTools({ recipe }: { recipe: RecipeData }) {
                             </button>
                           </div>
                           <span className="text-xl font-serif text-artisanal-dark leading-snug">
-                            {processed}
+                            {match ? (
+                              <>
+                                <span className="text-artisanal-brown font-bold mr-2">{match[1]}</span>
+                                <span className="opacity-60">{match[2]}</span>
+                              </>
+                            ) : (
+                              processed
+                            )}
                           </span>
                         </li>
                       );

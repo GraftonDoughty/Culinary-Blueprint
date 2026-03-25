@@ -134,6 +134,7 @@ export default function RecipeView({ recipe }: { recipe: RecipeData }) {
                 <ul className="space-y-6">
                   {recipe.ingredients.map((ing, idx) => {
                     const processed = processIngredient(ing);
+                    const match = processed.match(/^(\d+(?:\.\d+)?\s*[a-zA-Z]*)\s+(.*)$/i);
                     return (
                       <li key={idx} className="flex items-center text-xl text-artisanal-dark/80 font-serif leading-tight border-b border-cream-50 pb-6 last:border-0 group">
                         <div className="flex h-5 w-5 items-center justify-center mr-6">
@@ -146,7 +147,16 @@ export default function RecipeView({ recipe }: { recipe: RecipeData }) {
                             <Plus className="h-3 w-3" />
                            </button>
                         </div>
-                        <span className="flex-grow">{processed}</span>
+                        <span className="flex-grow">
+                          {match ? (
+                            <>
+                              <span className="text-artisanal-brown font-bold mr-2">{match[1]}</span>
+                              <span className="opacity-80">{match[2]}</span>
+                            </>
+                          ) : (
+                            processed
+                          )}
+                        </span>
                       </li>
                     );
                   })}
