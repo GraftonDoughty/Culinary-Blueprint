@@ -1,30 +1,31 @@
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
 import RecipeGrid from "@/components/RecipeGrid";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 
-export default function Home() {
+export default async function ArchivePage({ params }: { params: Promise<{ path: string }> }) {
+  const { path } = await params;
+  const title = path ? path.charAt(0).toUpperCase() + path.slice(1) : "Archive";
+
   return (
     <div className="flex min-h-screen flex-col bg-cream-50">
       <Navbar />
       
       <main className="flex-grow">
-        <Hero />
-        
+        <div className="bg-artisanal-brown/5 border-b border-cream-200">
+          <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+            <h1 className="font-serif text-4xl font-bold text-artisanal-dark">{title}</h1>
+            <p className="mt-2 text-sm text-artisanal-dark/60 font-medium uppercase tracking-widest">
+              Exploring the {title} collection
+            </p>
+          </div>
+        </div>
+
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-12 lg:gap-12">
-            {/* Main Content Area */}
             <div className="lg:col-span-8">
-              <div className="mb-12">
-                <h2 className="font-serif text-4xl font-bold text-artisanal-dark mb-4">Latest In The Archive</h2>
-                <div className="h-1 w-20 bg-artisanal-brown rounded-full" />
-              </div>
-              
               <RecipeGrid />
             </div>
-
-            {/* Sidebar */}
             <div className="mt-16 lg:col-span-4 lg:mt-0">
               <Sidebar />
             </div>
