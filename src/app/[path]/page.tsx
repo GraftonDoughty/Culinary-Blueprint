@@ -23,7 +23,7 @@ const getMockRecipe = (id: string): RecipeData | undefined => {
       temperature: "Hot",
       difficulty: "Hard",
       ingredients: ["500g Bread Flour", "350g Water", "100g Sourdough Starter", "10g Salt"],
-      steps: ["Mix flour and water", "Add starter and salt", "Perform stretch and folds", "Bulk ferment", "Shape and cold proof", "Bake at 450°F"]
+      steps: ["Mix flour and water and rest for 30 mins", "Add starter and salt", "Perform stretch and folds", "Bulk ferment for 4 hours", "Shape and cold proof", "Bake at 450°F for 45 minutes"]
     },
     "2": {
       id: "2",
@@ -35,7 +35,7 @@ const getMockRecipe = (id: string): RecipeData | undefined => {
       temperature: "Cold",
       difficulty: "Hard",
       ingredients: ["Almond Flour", "Powdered Sugar", "Egg Whites", "Granulated Sugar", "Dried Lavender"],
-      steps: ["Sift dry ingredients", "Make meringue", "Macaronage", "Pipe and rest", "Bake", "Fill with buttercream"]
+      steps: ["Sift dry ingredients", "Make meringue", "Macaronage", "Pipe and rest for 30 mins", "Bake for 15 minutes", "Fill with buttercream"]
     }
   };
   return recipes[id];
