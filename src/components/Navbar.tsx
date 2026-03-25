@@ -57,7 +57,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="border-b border-cream-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+    <nav className="border-b border-cream-200 bg-white/80 backdrop-blur-md sticky top-0 z-50 print:hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center flex-shrink-0">

@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Image from "next/image";
-import { Clock, Thermometer, Utensils, BarChart, Scale, Zap, RefreshCcw, Info, ChevronRight, Play, Plus, Check, History, Percent } from "lucide-react";
+import { Clock, Thermometer, Utensils, BarChart, Scale, Zap, RefreshCcw, Info, ChevronRight, Play, Plus, Check, History, Percent, Printer } from "lucide-react";
 import Link from "next/link";
 import { RecipeData } from "./RecipeForm";
 import { useGroceryList } from "@/hooks/useGroceryList";
@@ -67,17 +67,24 @@ export default function RecipeView({ recipe }: { recipe: RecipeData }) {
   };
 
   return (
-    <div className="bg-cream-50 min-h-screen pb-24 relative">
+    <div className="bg-cream-50 min-h-screen pb-24 relative print:bg-white print:pb-0">
       {/* Success Toast */}
       {message && (
-        <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] bg-artisanal-dark text-white px-6 py-3 rounded-full flex items-center shadow-2xl border border-white/10 animate-in slide-in-from-top-4 duration-300">
+        <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[100] bg-artisanal-dark text-white px-6 py-3 rounded-full flex items-center shadow-2xl border border-white/10 animate-in slide-in-from-top-4 duration-300 print:hidden">
           <Check className="h-4 w-4 mr-2 text-artisanal-brown" />
           <span className="text-xs font-bold uppercase tracking-widest">{message}</span>
         </div>
       )}
 
+      {/* Print-Only Header */}
+      <div className="hidden print:block text-center border-b-2 border-black pb-8 mb-8 mt-4 mx-8">
+        <h1 className="font-serif text-5xl font-bold text-black mb-4">{recipe.title}</h1>
+        <p className="font-serif italic text-xl text-black/80 max-w-2xl mx-auto">{recipe.description}</p>
+        <p className="text-[10px] uppercase tracking-[0.3em] mt-6 text-black/40 font-bold">Volume {recipe.id} • L'Archive Artisanal</p>
+      </div>
+
       {/* Hero Section */}
-      <div className="relative min-h-[70vh] w-full overflow-hidden">
+      <div className="relative min-h-[70vh] w-full overflow-hidden print:hidden">
         <Image 
           src={`/images/${recipe.id === '1' ? 'hero.png' : 'macarons.png'}`} 
           alt={recipe.title} 
@@ -99,39 +106,39 @@ export default function RecipeView({ recipe }: { recipe: RecipeData }) {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 -mt-20 relative z-10 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-[3rem] shadow-2xl border border-cream-200 overflow-hidden lg:grid lg:grid-cols-12">
+      <div className="mx-auto max-w-7xl px-4 -mt-20 relative z-10 sm:px-6 lg:px-8 print:m-0 print:p-0 print:max-w-none">
+        <div className="bg-white rounded-[3rem] shadow-2xl border border-cream-200 overflow-hidden lg:grid lg:grid-cols-12 print:shadow-none print:border-none print:rounded-none">
           {/* Main Content Area */}
-          <div className="lg:col-span-8 p-8 md:p-16">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-16 gap-8 pb-12 border-b border-cream-100">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
-                <div className="text-center md:text-left">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-artisanal-dark/30 mb-1">Time</p>
-                  <p className="text-artisanal-dark font-serif font-bold flex items-center justify-center md:justify-start">
-                    <Clock className="h-4 w-4 mr-2 text-artisanal-brown" /> {recipe.totalTime}
+          <div className="lg:col-span-8 p-8 md:p-16 print:p-8">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-16 gap-8 pb-12 border-b border-cream-100 print:border-black/20 print:mb-10 print:pb-8">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 print:w-full print:gap-4 print:grid-cols-4">
+                <div className="text-center md:text-left print:text-left">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-artisanal-dark/30 mb-1 print:text-black/40">Time</p>
+                  <p className="text-artisanal-dark font-serif font-bold flex items-center justify-center md:justify-start print:justify-start print:text-black">
+                    <Clock className="h-4 w-4 mr-2 text-artisanal-brown print:text-black/60" /> {recipe.totalTime}
                   </p>
                 </div>
-                <div className="text-center md:text-left">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-artisanal-dark/30 mb-1">Temp</p>
-                  <p className="text-artisanal-dark font-serif font-bold flex items-center justify-center md:justify-start">
-                    <Thermometer className="h-4 w-4 mr-2 text-artisanal-brown" /> {recipe.temperature}
+                <div className="text-center md:text-left print:text-left">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-artisanal-dark/30 mb-1 print:text-black/40">Temp</p>
+                  <p className="text-artisanal-dark font-serif font-bold flex items-center justify-center md:justify-start print:justify-start print:text-black">
+                    <Thermometer className="h-4 w-4 mr-2 text-artisanal-brown print:text-black/60" /> {recipe.temperature}
                   </p>
                 </div>
-                <div className="text-center md:text-left">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-artisanal-dark/30 mb-1">Difficulty</p>
-                  <p className="text-artisanal-dark font-serif font-bold flex items-center justify-center md:justify-start">
-                    <BarChart className="h-4 w-4 mr-2 text-artisanal-brown" /> {recipe.difficulty}
+                <div className="text-center md:text-left print:text-left">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-artisanal-dark/30 mb-1 print:text-black/40">Difficulty</p>
+                  <p className="text-artisanal-dark font-serif font-bold flex items-center justify-center md:justify-start print:justify-start print:text-black">
+                    <BarChart className="h-4 w-4 mr-2 text-artisanal-brown print:text-black/60" /> {recipe.difficulty}
                   </p>
                 </div>
-                <div className="text-center md:text-left">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-artisanal-dark/30 mb-1">Serves</p>
-                  <p className="text-artisanal-dark font-serif font-bold flex items-center justify-center md:justify-start">
-                    <Utensils className="h-4 w-4 mr-2 text-artisanal-brown" /> {multiplier * 4}
+                <div className="text-center md:text-left print:text-left">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-artisanal-dark/30 mb-1 print:text-black/40">Serves</p>
+                  <p className="text-artisanal-dark font-serif font-bold flex items-center justify-center md:justify-start print:justify-start print:text-black">
+                    <Utensils className="h-4 w-4 mr-2 text-artisanal-brown print:text-black/60" /> {multiplier * 4}
                   </p>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-4 w-full lg:w-auto">
+              <div className="flex flex-col gap-4 w-full lg:w-auto print:hidden">
                 {/* Tweak Controls Integrated */}
                 <div className="flex bg-cream-50 rounded-2xl p-2 items-center justify-between sm:justify-start gap-1 border border-cream-100 w-full lg:w-max">
                   <button onClick={() => setMultiplier(0.5)} className={`flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold transition-all ${multiplier === 0.5 ? 'bg-artisanal-dark text-white shadow-md' : 'text-artisanal-dark/40 hover:bg-cream-100'}`}>0.5x</button>
@@ -170,16 +177,16 @@ export default function RecipeView({ recipe }: { recipe: RecipeData }) {
               </div>
             </div>
 
-            <div className="space-y-24">
+            <div className="space-y-24 print:space-y-12">
               <section>
-                <h2 className="font-serif text-3xl font-bold text-artisanal-dark mb-10">Ingredients</h2>
-                <ul className="space-y-6">
+                <h2 className="font-serif text-3xl font-bold text-artisanal-dark mb-10 print:text-black print:mb-6">Ingredients</h2>
+                <ul className="space-y-6 print:space-y-2">
                   {recipe.ingredients.map((ing, idx) => {
                     const { result: processed, percent } = processIngredient(ing);
                     const match = processed.match(/^(\d+(?:\.\d+)?\s*[a-zA-Z]*)\s+(.*)$/i);
                     return (
-                      <li key={idx} className="flex items-center text-xl text-artisanal-dark/80 font-serif leading-tight border-b border-cream-50 pb-6 last:border-0 group">
-                        <div className="flex h-5 w-5 items-center justify-center mr-6 relative">
+                      <li key={idx} className="flex items-center text-xl text-artisanal-dark/80 font-serif leading-tight border-b border-cream-50 pb-6 last:border-0 group print:text-black print:text-base print:border-b-black/10 print:pb-2">
+                        <div className="flex h-5 w-5 items-center justify-center mr-6 relative print:hidden">
                            <div className="h-2 w-2 rounded-full bg-artisanal-brown/30 transition-all group-hover:scale-0" />
                            <button 
                             onClick={() => addItem(processed)}
@@ -193,15 +200,15 @@ export default function RecipeView({ recipe }: { recipe: RecipeData }) {
                           <span>
                             {match ? (
                               <>
-                                <span className="text-artisanal-brown font-bold mr-2">{match[1]}</span>
-                                <span className="opacity-80">{match[2]}</span>
+                                <span className="text-artisanal-brown font-bold mr-2 print:text-black">{match[1]}</span>
+                                <span className="opacity-80 print:opacity-100">{match[2]}</span>
                               </>
                             ) : (
                               processed
                             )}
                           </span>
                           {percent && (
-                            <span className="text-artisanal-brown font-sans font-bold text-xs px-2.5 py-1 bg-artisanal-brown/10 rounded-full ml-auto md:ml-2">
+                            <span className="text-artisanal-brown font-sans font-bold text-xs px-2.5 py-1 bg-artisanal-brown/10 rounded-full ml-auto md:ml-2 print:text-black/60 print:bg-transparent print:border print:border-black/20 print:ml-2">
                               {percent}
                             </span>
                           )}
@@ -213,29 +220,39 @@ export default function RecipeView({ recipe }: { recipe: RecipeData }) {
               </section>
 
               <section>
-                <h2 className="font-serif text-3xl font-bold text-artisanal-dark mb-10">Instructions</h2>
-                <div className="space-y-12">
+                <h2 className="font-serif text-3xl font-bold text-artisanal-dark mb-10 print:text-black print:mb-6">Instructions</h2>
+                <div className="space-y-12 print:space-y-6">
                   {recipe.steps.map((step: string, idx: number) => (
-                    <div key={idx} className="flex gap-8 group">
-                      <span className="font-serif text-4xl font-bold text-cream-200 mt-1 transition-colors group-hover:text-artisanal-brown/20 select-none">
+                    <div key={idx} className="flex gap-8 group print:gap-4">
+                      <span className="font-serif text-4xl font-bold text-cream-200 mt-1 transition-colors group-hover:text-artisanal-brown/20 select-none print:text-black/20 print:text-2xl">
                         {(idx + 1).toString().padStart(2, '0')}
                       </span>
-                      <p className="text-lg leading-relaxed text-artisanal-dark/70 pt-2">{step}</p>
+                      <p className="text-lg leading-relaxed text-artisanal-dark/70 pt-2 print:text-black print:text-base print:pt-0">{step}</p>
                     </div>
                   ))}
+                </div>
+
+                <div className="mt-20 pt-12 border-t border-cream-100 print:hidden flex justify-center">
+                  <button 
+                    onClick={() => window.print()}
+                    className="flex items-center bg-white text-artisanal-dark border border-cream-200 px-10 py-5 rounded-full font-bold text-xs uppercase tracking-[0.2em] hover:bg-cream-50 transition-all shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+                  >
+                    <Printer className="h-4 w-4 mr-3" />
+                    Print Recipe Card
+                  </button>
                 </div>
               </section>
             </div>
           </div>
 
           {/* Sidebar Area for Post-recipe Content */}
-          <div className="lg:col-span-4 bg-cream-50/30 p-8 md:p-12 border-l border-cream-100 flex flex-col justify-between">
+          <div className="lg:col-span-4 bg-cream-50/30 p-8 md:p-12 border-l border-cream-100 flex flex-col justify-between print:bg-white print:border-none print:p-8">
             <div>
-              <div className="bg-artisanal-dark/5 p-8 rounded-[2rem] border border-artisanal-dark/5 mb-12">
-                <div className="flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-artisanal-brown mb-6">
+              <div className="bg-artisanal-dark/5 p-8 rounded-[2rem] border border-artisanal-dark/5 mb-12 print:bg-transparent print:border-black/20 print:p-6 print:rounded-xl">
+                <div className="flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-artisanal-brown mb-6 print:text-black">
                   <Info className="h-3 w-3 mr-2" /> Artisanal Note
                 </div>
-                <p className="text-xs text-artisanal-dark/60 leading-relaxed font-medium">
+                <p className="text-xs text-artisanal-dark/60 leading-relaxed font-medium print:text-black/80">
                   This recipe requires high-quality ingredients. We recommend using locally sourced, organic flour and hand-harvested sea salt for the best results in your environment.
                 </p>
               </div>
