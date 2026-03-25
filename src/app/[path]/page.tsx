@@ -127,18 +127,30 @@ export default async function DynamicPathPage({
     );
   }
 
-  const title = path ? path.charAt(0).toUpperCase() + path.slice(1) : "Archive";
+  const isArchive = path === "archive";
+  const title = isArchive ? "The Complete Archive" : (path ? path.charAt(0).toUpperCase() + path.slice(1) : "Archive");
 
   return (
     <div className="flex min-h-screen flex-col bg-cream-50">
       <Navbar />
       
       <main className="flex-grow">
-        <div className="bg-artisanal-brown/5 border-b border-cream-200">
-          <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-            <h1 className="font-serif text-4xl font-bold text-artisanal-dark">{title}</h1>
-            <p className="mt-2 text-sm text-artisanal-dark/60 font-medium uppercase tracking-widest">
-              Exploring the {title} collection
+        <div className="bg-artisanal-dark border-b border-white/5 py-24 relative overflow-hidden">
+          {/* Decorative background element */}
+          <div className="absolute top-0 right-0 p-12 opacity-[0.03] pointer-events-none">
+            <span className="text-[200px] font-serif font-bold text-white leading-none select-none">Explore</span>
+          </div>
+
+          <div className="mx-auto max-w-7xl px-4 relative z-10 sm:px-6 lg:px-8">
+            <span className="text-artisanal-brown font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">
+              Curated Collection
+            </span>
+            <h1 className="font-serif text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">{title}</h1>
+            <p className="text-white/40 text-sm font-medium uppercase tracking-[0.2em] max-w-lg leading-relaxed">
+              {isArchive 
+                ? "Every technique, every ingredient, and every discovery we've ever documented, preserved for the curious cook."
+                : `Exploring the refined selection of ${title} in our artisanal archive.`
+              }
             </p>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -16,12 +17,12 @@ export default function Hero() {
               A curated space for the curious cook. Document, test, and share your culinary discoveries in a refined, distraction-free environment.
             </p>
             <div className="mt-10 flex items-center gap-x-6 sm:justify-center lg:justify-start">
-              <button className="rounded-full bg-artisanal-dark px-8 py-4 text-sm font-semibold text-white shadow-sm hover:bg-artisanal-brown transition-all duration-300">
+              <Link 
+                href="/archive"
+                className="rounded-full bg-artisanal-dark px-10 py-4 text-sm font-semibold text-white shadow-xl hover:bg-artisanal-brown transition-all duration-300 transform hover:-translate-y-1"
+              >
                 Explore The Archive
-              </button>
-              <button className="text-sm font-semibold leading-6 text-artisanal-dark hover:text-artisanal-brown transition-colors">
-                Learn More <span aria-hidden="true">→</span>
-              </button>
+              </Link>
             </div>
           </div>
           <div className="relative mt-16 sm:mt-24 lg:col-span-6 lg:mt-0">
