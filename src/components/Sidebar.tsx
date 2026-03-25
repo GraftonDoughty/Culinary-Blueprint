@@ -1,23 +1,6 @@
 export default function Sidebar() {
   return (
     <aside className="space-y-8">
-      <div className="rounded-3xl bg-cream-100 p-8 border border-cream-200">
-        <h3 className="font-serif text-2xl font-bold text-artisanal-dark mb-4 text-center">Join The Archive</h3>
-        <p className="text-sm text-artisanal-dark/60 leading-relaxed text-center mb-6">
-          Be the first to know about new artisanal recipes, testing techniques, and seasonal ingredients.
-        </p>
-        <div className="space-y-4">
-          <input
-            type="email"
-            placeholder="Email Address"
-            className="w-full rounded-full border-cream-200 bg-white px-6 py-3 text-sm focus:ring-artisanal-brown focus:border-artisanal-brown outline-none transition-all"
-          />
-          <button className="w-full rounded-full bg-artisanal-dark py-3 text-sm font-bold text-white hover:bg-artisanal-brown transition-all">
-            Subscribe
-          </button>
-        </div>
-      </div>
-
       <div className="rounded-3xl bg-artisanal-brown/10 p-8 border border-artisanal-brown/10">
         <h3 className="font-serif text-xl font-bold text-artisanal-dark mb-4">Trending Collections</h3>
         <ul className="space-y-4">
