@@ -46,7 +46,7 @@ export default function RecipeView({ recipe }: { recipe: RecipeData }) {
       )}
 
       {/* Hero Section */}
-      <div className="relative h-[60vh] w-full overflow-hidden">
+      <div className="relative min-h-[70vh] w-full overflow-hidden">
         <Image 
           src={`/images/${recipe.id === '1' ? 'hero.png' : 'macarons.png'}`} 
           alt={recipe.title} 
@@ -56,30 +56,14 @@ export default function RecipeView({ recipe }: { recipe: RecipeData }) {
         />
         <div className="absolute inset-0 bg-artisanal-dark/20" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white px-4 max-w-4xl">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-artisanal-brown/80 backdrop-blur-md text-[10px] font-bold uppercase tracking-[0.3em] mb-6">
+          <div className="text-center text-white px-6 max-w-4xl">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-artisanal-brown/80 backdrop-blur-md text-[10px] font-bold uppercase tracking-[0.3em] mb-4 md:mb-6">
               {recipe.category}
             </span>
-            <h1 className="font-serif text-6xl md:text-8xl font-bold mb-6 drop-shadow-2xl">{recipe.title}</h1>
-            <p className="font-serif italic text-xl md:text-2xl text-white/90 max-w-2xl mx-auto mb-10 drop-shadow-md">
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-4 md:mb-6 drop-shadow-2xl">{recipe.title}</h1>
+            <p className="font-serif italic text-base sm:text-xl md:text-2xl text-white/90 max-w-2xl mx-auto mb-0 drop-shadow-md">
               {recipe.description}
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link 
-                href={`/cook?id=${recipe.id}`}
-                className="group flex items-center bg-artisanal-brown text-white px-10 py-5 rounded-full font-bold text-sm uppercase tracking-[0.2em] shadow-2xl hover:bg-artisanal-dark transition-all transform hover:-translate-y-1"
-              >
-                <Play className="h-4 w-4 mr-3 fill-current" />
-                Start Cooking Mode
-              </Link>
-              <Link 
-                href={`/history?id=${recipe.id}`}
-                className="flex items-center bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-5 rounded-full font-bold text-sm uppercase tracking-[0.2em] hover:bg-white hover:text-artisanal-dark transition-all transform hover:-translate-y-1"
-              >
-                <History className="h-4 w-4 mr-3" />
-                Recipe History
-              </Link>
-            </div>
           </div>
         </div>
       </div>
@@ -88,7 +72,7 @@ export default function RecipeView({ recipe }: { recipe: RecipeData }) {
         <div className="bg-white rounded-[3rem] shadow-2xl border border-cream-200 overflow-hidden lg:grid lg:grid-cols-12">
           {/* Main Content Area */}
           <div className="lg:col-span-8 p-8 md:p-16">
-            <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-8 pb-12 border-b border-cream-100">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-16 gap-8 pb-12 border-b border-cream-100">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
                 <div className="text-center md:text-left">
                   <p className="text-[10px] font-bold uppercase tracking-widest text-artisanal-dark/30 mb-1">Time</p>
@@ -116,15 +100,37 @@ export default function RecipeView({ recipe }: { recipe: RecipeData }) {
                 </div>
               </div>
 
-              {/* Tweak Controls Integrated */}
-              <div className="flex bg-cream-50 rounded-2xl p-2 items-center gap-1 border border-cream-100">
-                <button onClick={() => setMultiplier(0.5)} className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${multiplier === 0.5 ? 'bg-artisanal-dark text-white shadow-md' : 'text-artisanal-dark/40 hover:bg-cream-100'}`}>0.5x</button>
-                <button onClick={() => setMultiplier(1)} className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${multiplier === 1 ? 'bg-artisanal-dark text-white shadow-md' : 'text-artisanal-dark/40 hover:bg-cream-100'}`}>1x</button>
-                <button onClick={() => setMultiplier(2)} className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${multiplier === 2 ? 'bg-artisanal-dark text-white shadow-md' : 'text-artisanal-dark/40 hover:bg-cream-100'}`}>2x</button>
-                <div className="w-[1px] h-4 bg-cream-200 mx-2" />
-                <button onClick={() => setUseMetric(!useMetric)} className={`p-2 rounded-xl transition-all ${useMetric ? 'bg-artisanal-brown text-white' : 'text-artisanal-dark/40 hover:bg-cream-100'}`} title="Metric Units">
-                  <Scale className="h-4 w-4" />
-                </button>
+              <div className="flex flex-col gap-4 w-full lg:w-auto">
+                {/* Tweak Controls Integrated */}
+                <div className="flex bg-cream-50 rounded-2xl p-2 items-center justify-between sm:justify-start gap-1 border border-cream-100 w-full lg:w-max">
+                  <button onClick={() => setMultiplier(0.5)} className={`flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold transition-all ${multiplier === 0.5 ? 'bg-artisanal-dark text-white shadow-md' : 'text-artisanal-dark/40 hover:bg-cream-100'}`}>0.5x</button>
+                  <button onClick={() => setMultiplier(1)} className={`flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold transition-all ${multiplier === 1 ? 'bg-artisanal-dark text-white shadow-md' : 'text-artisanal-dark/40 hover:bg-cream-100'}`}>1x</button>
+                  <button onClick={() => setMultiplier(2)} className={`flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold transition-all ${multiplier === 2 ? 'bg-artisanal-dark text-white shadow-md' : 'text-artisanal-dark/40 hover:bg-cream-100'}`}>2x</button>
+                  <div className="hidden sm:block w-[1px] h-4 bg-cream-200 mx-2" />
+                  <button onClick={() => setUseMetric(!useMetric)} className={`ml-auto sm:ml-0 p-2 rounded-xl transition-all ${useMetric ? 'bg-artisanal-brown text-white' : 'text-artisanal-dark/40 hover:bg-cream-100'}`} title="Metric Units">
+                    <Scale className="h-4 w-4" />
+                  </button>
+                </div>
+
+                {/* Actions */}
+                <div className="flex gap-3">
+                  <Link 
+                    href={`/cook?id=${recipe.id}`}
+                    className="flex-1 group flex justify-center items-center bg-artisanal-brown text-white px-4 py-4 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] shadow-md hover:bg-artisanal-dark transition-all transform hover:-translate-y-0.5"
+                  >
+                    <Play className="h-4 w-4 md:mr-2 fill-current" />
+                    <span className="hidden md:inline">Cook Mode</span>
+                    <span className="md:hidden">Cook</span>
+                  </Link>
+                  <Link 
+                    href={`/history?id=${recipe.id}`}
+                    className="flex-1 flex justify-center items-center bg-white text-artisanal-dark border border-cream-200 px-4 py-4 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] hover:bg-cream-50 transition-all transform hover:-translate-y-0.5"
+                  >
+                    <History className="h-4 w-4 md:mr-2" />
+                    <span className="hidden md:inline">History</span>
+                    <span className="md:hidden">Log</span>
+                  </Link>
+                </div>
               </div>
             </div>
 

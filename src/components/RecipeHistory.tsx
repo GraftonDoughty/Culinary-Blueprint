@@ -25,19 +25,17 @@ export default function RecipeHistory({ recipeId, currentData }: { recipeId: str
   };
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8 bg-cream-50 min-h-screen relative">
-      <div className="flex items-center justify-between mb-16">
-        <div>
-          <Link href={`/view?id=${recipeId}`} className="inline-flex items-center text-artisanal-dark/40 hover:text-artisanal-dark transition-colors mb-4 group">
-            <ArrowLeft className="h-4 w-4 mr-2 transition-transform group-hover:-translate-x-1" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Back to Recipe</span>
-          </Link>
-          <h1 className="font-serif text-5xl font-bold text-artisanal-dark">Recipe History</h1>
-        </div>
+    <div className="mx-auto max-w-5xl px-4 py-10 sm:py-12 sm:px-6 lg:px-8 bg-cream-50 min-h-screen relative">
+      <div className="mb-10 md:mb-16">
+        <Link href={`/view?id=${recipeId}`} className="inline-flex items-center text-artisanal-dark/40 hover:text-artisanal-dark transition-colors mb-4 group">
+          <ArrowLeft className="h-4 w-4 mr-2 transition-transform group-hover:-translate-x-1" />
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Back to Recipe</span>
+        </Link>
+        <h1 className="font-serif text-4xl md:text-5xl font-bold text-artisanal-dark">Recipe History</h1>
       </div>
 
       {versions.length === 0 ? (
-        <div className="bg-white rounded-[3rem] p-24 text-center border border-cream-200 border-dashed">
+        <div className="bg-white rounded-[3rem] p-10 sm:p-24 text-center border border-cream-200 border-dashed">
           <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-cream-50 mb-8">
             <Clock className="h-10 w-10 text-cream-200" />
           </div>
@@ -50,16 +48,16 @@ export default function RecipeHistory({ recipeId, currentData }: { recipeId: str
         <div className="space-y-12">
           {versions.map((version, vIdx) => (
             <div key={version.id} className="bg-white rounded-[3rem] shadow-xl border border-cream-200 overflow-hidden">
-              <div className="p-8 md:p-12 border-b border-cream-100 flex items-center justify-between bg-cream-50/30">
+              <div className="p-6 md:p-12 border-b border-cream-100 flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-cream-50/30">
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-artisanal-brown mb-2">Version {versions.length - vIdx}</p>
-                  <h3 className="font-serif text-2xl font-bold text-artisanal-dark">
+                  <h3 className="font-serif text-lg md:text-2xl font-bold text-artisanal-dark">
                     Saved {new Date(version.timestamp).toLocaleString()}
                   </h3>
                 </div>
                 <button 
                   onClick={() => setShowConfirm(version.id)}
-                  className="flex items-center bg-artisanal-dark text-white px-8 py-4 rounded-full font-bold text-xs uppercase tracking-[0.2em] shadow-lg hover:bg-artisanal-brown transition-all"
+                  className="w-full sm:w-auto flex items-center justify-center bg-artisanal-dark text-white px-8 py-4 rounded-full font-bold text-xs uppercase tracking-[0.2em] shadow-lg hover:bg-artisanal-brown transition-all"
                 >
                   <RotateCcw className="h-4 w-4 mr-2" />
                   Revert to this
@@ -109,17 +107,17 @@ export default function RecipeHistory({ recipeId, currentData }: { recipeId: str
               </div>
 
               {showConfirm === version.id && (
-                <div className="p-12 bg-artisanal-brown/5 border-t border-artisanal-brown/10 animate-in fade-in zoom-in-95 duration-300">
-                  <div className="flex items-center gap-6 max-w-2xl mx-auto">
+                <div className="p-6 md:p-12 bg-artisanal-brown/5 border-t border-artisanal-brown/10 animate-in fade-in zoom-in-95 duration-300">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 max-w-2xl mx-auto">
                     <div className="h-16 w-16 rounded-full bg-artisanal-brown/10 flex items-center justify-center flex-shrink-0">
                       <AlertCircle className="h-8 w-8 text-artisanal-brown" />
                     </div>
-                    <div>
-                      <h4 className="font-serif text-2xl font-bold text-artisanal-dark mb-2">Revert to this version?</h4>
+                    <div className="flex-1">
+                      <h4 className="font-serif text-xl md:text-2xl font-bold text-artisanal-dark mb-2">Revert to this version?</h4>
                       <p className="text-sm text-artisanal-dark/60 mb-6">
                         This will overwrite your current recipe data with the snapshot from {new Date(version.timestamp).toLocaleString()}. This action cannot be undone.
                       </p>
-                      <div className="flex gap-4">
+                      <div className="flex flex-wrap gap-4">
                         <button 
                           onClick={() => handleRevert(version)}
                           className="bg-artisanal-dark text-white px-10 py-4 rounded-full font-bold text-xs uppercase tracking-[0.2em] shadow-xl hover:bg-green-800 transition-all"
