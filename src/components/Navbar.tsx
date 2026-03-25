@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, ShoppingBasket, X } from "lucide-react";
+import { Search, ShoppingBasket, X, Archive } from "lucide-react";
 import Link from "next/link";
 import { useGroceryList } from "@/hooks/useGroceryList";
 import { useState, useRef, useEffect } from "react";
@@ -115,7 +115,10 @@ export default function Navbar() {
             >
               <Search className="h-5 w-5" />
             </button>
-            <Link href="/grocery-list" className="text-artisanal-dark/40 hover:text-artisanal-dark transition-colors relative">
+            <Link href="/archive" className="text-artisanal-dark/40 hover:text-artisanal-dark transition-colors" title="Archive">
+              <Archive className="h-5 w-5" />
+            </Link>
+            <Link href="/grocery-list" className="text-artisanal-dark/40 hover:text-artisanal-dark transition-colors relative" title="Grocery List">
               <ShoppingBasket className="h-5 w-5" />
               {items.length > 0 && (
                 <span className="absolute -top-1.5 -right-1.5 h-3 w-3 bg-artisanal-brown rounded-full" />
