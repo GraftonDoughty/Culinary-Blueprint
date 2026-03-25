@@ -15,7 +15,7 @@ export default function NewRecipeModal({ isOpen, onClose }: { isOpen: boolean; o
           </button>
         </div>
 
-        <form className="p-8 space-y-8" onSubmit={(e) => { e.preventDefault(); onClose(); }}>
+        <form className="p-8 space-y-8 text-left" onSubmit={(e) => { e.preventDefault(); onClose(); }}>
           <div className="space-y-4">
             <label className="flex items-center text-sm font-bold uppercase tracking-widest text-artisanal-brown">
               <Type className="h-4 w-4 mr-2" />
@@ -26,6 +26,15 @@ export default function NewRecipeModal({ isOpen, onClose }: { isOpen: boolean; o
               placeholder="e.g. Artisanal Sourdough"
               className="w-full rounded-2xl border border-cream-200 bg-white px-6 py-4 text-base focus:ring-artisanal-brown focus:border-artisanal-brown outline-none transition-all placeholder:text-artisanal-dark/20"
               required
+            />
+          </div>
+
+          <div className="space-y-4">
+            <label className="flex items-center text-sm font-bold uppercase tracking-widest text-artisanal-brown">Description</label>
+            <textarea
+              placeholder="Brief overview..."
+              rows={2}
+              className="w-full rounded-2xl border border-cream-200 bg-white px-6 py-4 text-base focus:ring-artisanal-brown focus:border-artisanal-brown outline-none transition-all placeholder:text-artisanal-dark/20 resize-none"
             />
           </div>
 
@@ -52,6 +61,24 @@ export default function NewRecipeModal({ isOpen, onClose }: { isOpen: boolean; o
                 <option>Appetizer</option>
               </select>
             </div>
+          </div>
+
+          <div className="space-y-4">
+            <label className="flex items-center text-sm font-bold uppercase tracking-widest text-artisanal-brown">Ingredients</label>
+            <textarea
+              placeholder="Enter ingredients (one per line)..."
+              rows={3}
+              className="w-full rounded-2xl border border-cream-200 bg-white px-6 py-4 text-sm focus:ring-artisanal-brown focus:border-artisanal-brown outline-none transition-all placeholder:text-artisanal-dark/20"
+            />
+          </div>
+
+          <div className="space-y-4">
+            <label className="flex items-center text-sm font-bold uppercase tracking-widest text-artisanal-brown">Instructions</label>
+            <textarea
+              placeholder="Describe the steps..."
+              rows={3}
+              className="w-full rounded-2xl border border-cream-200 bg-white px-6 py-4 text-sm focus:ring-artisanal-brown focus:border-artisanal-brown outline-none transition-all placeholder:text-artisanal-dark/20"
+            />
           </div>
 
           <div className="space-y-4">

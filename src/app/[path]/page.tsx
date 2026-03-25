@@ -2,9 +2,23 @@ import Navbar from "@/components/Navbar";
 import RecipeGrid from "@/components/RecipeGrid";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
+import RecipeForm from "@/components/RecipeForm";
 
-export default async function ArchivePage({ params }: { params: Promise<{ path: string }> }) {
+export default async function DynamicPathPage({ params }: { params: Promise<{ path: string }> }) {
   const { path } = await params;
+  
+  if (path === "create" || path === "add") {
+    return (
+      <div className="flex min-h-screen flex-col bg-cream-50">
+        <Navbar />
+        <main className="flex-grow">
+          <RecipeForm />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   const title = path ? path.charAt(0).toUpperCase() + path.slice(1) : "Archive";
 
   return (
