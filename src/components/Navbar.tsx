@@ -11,13 +11,12 @@ import { useAuth } from "@/context/AuthContext";
 export default function Navbar() {
   const { items } = useGroceryList();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { user, logout } = useAuth();
+  const { user, logout, openAuthModal } = useAuth();
 
   // Sync search input with URL on load
   useEffect(() => {
@@ -143,7 +142,7 @@ export default function Navbar() {
                </div>
             ) : (
                <button 
-                 onClick={() => setIsAuthModalOpen(true)}
+                 onClick={openAuthModal}
                  className="bg-artisanal-dark text-white px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] hover:bg-artisanal-brown transition-colors shadow-sm"
                >
                  Sign In
@@ -152,8 +151,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      
-      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </nav>
   );
 }

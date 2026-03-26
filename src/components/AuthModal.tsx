@@ -4,8 +4,15 @@ import { useState } from "react";
 import { X, Mail, Lock, Loader2, ArrowRight, User } from "lucide-react";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { useAuth } from "@/context/AuthContext";
 
-export default function AuthModal({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
+export default function AuthModal({ isOpen: propIsOpen, onClose: propOnClose }: { isOpen?: boolean, onClose?: () => void }) {
+  const { isAuthModalOpen, closeAuthModal } = useAuth();
+  
+  // Use props if provided, otherwise fallback to context
+  const isOpen = propIsOpen !== undefined ? propIsOpen : isAuthModalOpen;
+  const onClose = propOnClose !== undefined ? propOnClose : closeAuthModal;
+
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
