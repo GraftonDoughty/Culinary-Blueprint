@@ -46,7 +46,7 @@ export default function AuthModal({ isOpen, onClose }: { isOpen: boolean, onClos
   return (
     <div className="fixed inset-0 z-[300] bg-artisanal-dark/40 backdrop-blur-sm flex items-center justify-center p-4">
       <div 
-        className="bg-cream-50 w-full max-w-md mt-16 sm:mt-24 rounded-[2rem] shadow-2xl border border-cream-200 overflow-hidden animate-in fade-in zoom-in-95 duration-300"
+        className="bg-cream-50 w-full max-w-md rounded-[2rem] shadow-2xl border border-cream-200 overflow-hidden animate-in fade-in zoom-in-95 duration-300"
       >
         <div className="flex justify-between items-center p-6 border-b border-cream-100 bg-white">
           <h2 className="font-serif text-2xl font-bold text-artisanal-dark">
